@@ -1,0 +1,50 @@
+<div class="events-page">
+  <h1>Events</h1>
+  <section class="add">
+    <a class="button">Host a Job Fair</a>
+    <a class="button">Host an Event</a>
+  </section>
+  <section class="filters-box">
+    <div class="filters">
+      <div class="filter" ng-repeat="filter in $ctrl.filters">
+        <label>{{filter.label}}</label>
+        <select
+          ng-if="filter.type === 'select'"
+          ng-model="filter.value">
+          <option value="All">All</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+        <input type="text" ng-if="filter.type ==='text'" ng-model="filter.value" />
+      </div>
+    </div>
+    <div class="buttons">
+      <a class="secondary button" ng-click="$ctrl.clearFilters()">Clear Filters</a>
+      <a class="button" ng-click="$ctrl.getResults()">Get Results</a>
+    </div>
+  </section>
+  <section class="results" ng-if="$ctrl.results.length > 0">
+    <span class="count">Results Found: {{$ctrl.results.length}}</span>
+    <div class="result-list">
+      <div class="header row">
+        <div class="check column"></div>
+        <div class="name column">Event Name</div>
+        <div class="date column">Date and Time</div>
+        <div class="status column">Status</div>
+        <div class="registrants column">Registrants</div>
+      </div>
+      <div class="row" ng-repeat="result in $ctrl.results">
+        <div class="check column">
+          <input type="checkbox" />
+        </div>
+        <div class="name column">{{result.name}}</div>
+        <div class="date column">{{result.dateAndTime}}</div>
+        <div class="status column">
+          <span ng-if="result.status === 'open'" class="open">Open</span>
+          <span ng-if="result.status === 'closed'" class="closed">Closed</span>
+        </div>
+        <div class="registrants column">{{result.registrants}}</div>
+      </div>
+    </div>
+  </section>
+</div>
